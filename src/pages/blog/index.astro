@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Calendar, Clock, Tag } from "lucide-astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blog | Dishant Shakya"
+  description="Financial insights, market analysis, and investment commentary by Dishant Shakya. Stay updated on Nepal's capital markets and investment strategies."
+>
+  <!-- Page Header -->
+  <section class="py-20 bg-primary-900/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-extrabold text-white mb-4">Financial Insights</h1>
+      <p class="text-lg text-gray-400 max-w-2xl">
+        Thoughts on market trends, investment strategies, and financial analysis from my experience in Nepal's capital markets.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {posts.length === 0 ? (
+        <div class="text-center py-20">
+          <p class="text-gray-500 text-lg">Articles coming soon. Stay tuned for financial insights and market analysis.</p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article class="group rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 overflow-hidden transition-all duration-300">
+              {post.data.heroImage && (
+                <div class="aspect-video overflow-hidden">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div class="p-6">
+                <div class="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                  <span class="flex items-center gap-1">
+                    <Calendar class="w-3 h-3" />
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
+                <h2 class="text-lg font-bold text-white mb-2 group-hover:text-accent-400 transition-colors">
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </h2>
+                <p class="text-sm text-gray-400 leading-relaxed mb-4">{post.data.description}</p>
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {post.data.tags.map((tag) => (
+                      <span class="px-2 py-0.5 text-xs font-medium text-accent-400 bg-accent-500/10 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

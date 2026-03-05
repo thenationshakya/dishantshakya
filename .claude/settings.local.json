@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create astro@latest . -- --template minimal --no-install --no-git --typescript strict)",
+      "Bash(npm install)",
+      "Bash(npx astro build)",
+      "Bash(nvm list)",
+      "Bash(nvm use 20.5.1)",
+      "Bash(nvm use 24.14.0)",
+      "Bash(export PATH=\"/c/Users/user/AppData/Roaming/nvm/v24.14.0:$PATH\")",
+      "Bash(npx astro dev)"
+    ]
+  }
+}

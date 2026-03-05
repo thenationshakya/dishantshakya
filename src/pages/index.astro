@@ -1,0 +1,218 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "lucide-astro";
+---
+
+<BaseLayout
+  title="Dishant Shakya | Investment Analyst"
+  description="Dishant Shakya is an Investment Analyst specializing in equity research, financial modeling, and market analysis. Driving data-driven investment decisions."
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background Grid Pattern -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(15,36,64,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(15,36,64,0.8)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-950 via-transparent to-primary-950"></div>
+
+    <!-- Accent Glow -->
+    <div class="absolute top-1/4 -right-32 w-96 h-96 bg-accent-500/10 rounded-full blur-[128px]"></div>
+    <div class="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary-600/10 rounded-full blur-[128px]"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-500/10 border border-accent-500/20 text-accent-400 text-sm font-medium mb-6">
+            <TrendingUp class="w-4 h-4" />
+            Investment Analyst
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+            Turning Data Into
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-blue-400">
+              Investment Insight
+            </span>
+          </h1>
+
+          <p class="mt-6 text-lg text-gray-400 leading-relaxed max-w-lg">
+            I'm <strong class="text-white">Dishant Shakya</strong>, an Investment Analyst with a passion for
+            uncovering value through rigorous equity research, financial modeling, and strategic market analysis.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white font-semibold rounded-lg transition-colors"
+            >
+              Get in Touch
+              <ArrowRight class="w-4 h-4" />
+            </a>
+            <a
+              href="/experience"
+              class="inline-flex items-center gap-2 px-6 py-3 border border-primary-700 hover:border-primary-600 text-gray-300 hover:text-white font-semibold rounded-lg transition-colors"
+            >
+              View Experience
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Visual - Profile Photo -->
+        <div class="hidden lg:flex justify-center">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-accent-500/20 to-primary-600/20 rounded-full blur-2xl"></div>
+            <div class="relative w-80 h-80 rounded-full overflow-hidden border-4 border-primary-800/50 shadow-2xl shadow-accent-500/10">
+              <img
+                src="/Dishant Shakya JFIF.jfif"
+                alt="Dishant Shakya - Investment Analyst"
+                class="w-full h-full object-cover"
+                width="320"
+                height="320"
+                loading="eager"
+              />
+            </div>
+            <!-- Stats badges -->
+            <div class="absolute -bottom-2 -left-4 px-4 py-2 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
+              <p class="text-lg font-bold text-accent-400">5+</p>
+              <p class="text-xs text-gray-400">Years Exp.</p>
+            </div>
+            <div class="absolute -bottom-2 -right-4 px-4 py-2 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
+              <p class="text-lg font-bold text-accent-400">50+</p>
+              <p class="text-xs text-gray-400">Companies</p>
+            </div>
+            <div class="absolute -top-2 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
+              <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <p class="text-xs text-gray-400">Available</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 bg-primary-900/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-sm font-semibold text-accent-400 uppercase tracking-wider mb-3">About Me</h2>
+        <h3 class="text-3xl font-bold text-white mb-6">
+          Bridging Finance and Strategy
+        </h3>
+        <p class="text-gray-400 leading-relaxed mb-4">
+          As an Investment Analyst at National Capital, I specialize in evaluating investment opportunities
+          across Nepal's capital markets. My approach combines quantitative analysis with qualitative
+          insights to deliver comprehensive investment recommendations.
+        </p>
+        <p class="text-gray-400 leading-relaxed">
+          I believe that disciplined research and data-driven methodologies are the foundation of
+          sound investment decisions. Whether it's building DCF models, conducting sector analysis,
+          or assessing macroeconomic trends, I bring analytical rigor to every project.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-sm font-semibold text-accent-400 uppercase tracking-wider mb-3">Expertise</h2>
+        <h3 class="text-3xl font-bold text-white">Core Competencies</h3>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Equity Research -->
+        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
+            <TrendingUp class="w-6 h-6 text-accent-400" />
+          </div>
+          <h4 class="text-xl font-semibold text-white mb-3">Equity Research</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            In-depth fundamental analysis of listed companies, including financial statement analysis,
+            competitive positioning, and valuation modeling.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Fundamental Analysis
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Valuation Techniques
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Sector Research
+            </li>
+          </ul>
+        </div>
+
+        <!-- Financial Modeling -->
+        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
+            <BarChart3 class="w-6 h-6 text-accent-400" />
+          </div>
+          <h4 class="text-xl font-semibold text-white mb-3">Financial Modeling</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            Building robust financial models including DCF, comparable company analysis,
+            and scenario-based projections for investment decisions.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              DCF Models
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Comparable Analysis
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Scenario Analysis
+            </li>
+          </ul>
+        </div>
+
+        <!-- Market Analysis -->
+        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
+            <LineChart class="w-6 h-6 text-accent-400" />
+          </div>
+          <h4 class="text-xl font-semibold text-white mb-3">Market Analysis</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            Comprehensive market research covering macroeconomic trends, sector dynamics,
+            and regulatory impacts on Nepal's financial markets.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Macro Analysis
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Technical Analysis
+            </li>
+            <li class="flex items-center gap-2 text-sm text-gray-500">
+              <ChevronRight class="w-3 h-3 text-accent-500" />
+              Regulatory Impact
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-900/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Let's Discuss Investment Opportunities</h2>
+      <p class="text-gray-400 max-w-xl mx-auto mb-8">
+        Looking for investment insights or professional analysis? I'd love to connect and explore how I can help.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-8 py-3 bg-accent-500 hover:bg-accent-600 text-white font-semibold rounded-lg transition-colors"
+      >
+        Contact Me
+        <ArrowRight class="w-4 h-4" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

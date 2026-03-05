@@ -1,0 +1,89 @@
+---
+import { Menu, X } from "lucide-astro";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/experience", label: "Experience" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-950/80 backdrop-blur-md border-b border-primary-800/50">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href="/" class="text-xl font-bold text-white tracking-tight">
+        Dishant<span class="text-accent-400">.</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "text-sm font-medium transition-colors duration-200",
+                currentPath === link.href
+                  ? "text-accent-400"
+                  : "text-gray-300 hover:text-white",
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-gray-300 hover:text-white"
+        aria-label="Toggle menu"
+      >
+        <Menu class="w-6 h-6 block" id="menu-open-icon" />
+        <X class="w-6 h-6 hidden" id="menu-close-icon" />
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <ul class="flex flex-col gap-2">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "block py-2 px-3 rounded-lg text-sm font-medium transition-colors",
+                currentPath === link.href
+                  ? "text-accent-400 bg-primary-900"
+                  : "text-gray-300 hover:text-white hover:bg-primary-900/50",
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const openIcon = document.getElementById("menu-open-icon");
+  const closeIcon = document.getElementById("menu-close-icon");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden");
+    openIcon?.classList.toggle("hidden");
+    openIcon?.classList.toggle("block");
+    closeIcon?.classList.toggle("hidden");
+    closeIcon?.classList.toggle("block");
+    btn.setAttribute("aria-expanded", String(!isOpen));
+  });
+</script>
