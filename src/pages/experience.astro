@@ -1,60 +1,46 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Briefcase, GraduationCap, Award } from "lucide-astro";
+import { Briefcase, GraduationCap, Award, TrendingUp } from "lucide-astro";
 
 const experiences = [
   {
     type: "work",
     title: "Investment Analyst",
     organization: "National Capital",
-    period: "2022 - Present",
+    period: "August 2025 - Present",
     description:
-      "Leading equity research and investment analysis for Nepal's capital markets. Responsible for building financial models, conducting sector analysis, and delivering actionable investment recommendations to clients.",
-    highlights: [
-      "Conducted in-depth fundamental analysis of 50+ listed companies across NEPSE",
-      "Built comprehensive DCF and comparable company valuation models",
-      "Authored 20+ detailed equity research reports for institutional clients",
-      "Tracked macroeconomic indicators and regulatory developments impacting capital markets",
-    ],
+      "Conducting equity research and fundamental analysis across Nepal's listed companies. Building financial models, tracking sector and macroeconomic developments, and preparing research that supports sound investment decisions.",
+    highlights: [],
   },
   {
     type: "work",
-    title: "Junior Analyst",
+    title: "Intern",
     organization: "National Capital",
-    period: "2020 - 2022",
+    period: "November 2024 - January 2025",
     description:
-      "Supported the senior research team with data collection, financial statement analysis, and market monitoring. Developed foundational skills in investment analysis and financial modeling.",
-    highlights: [
-      "Assisted in preparing quarterly earnings analysis for key NEPSE sectors",
-      "Maintained and updated financial databases and valuation spreadsheets",
-      "Monitored daily market activity and prepared morning market briefs",
-      "Contributed to sector-specific research notes on banking and hydropower industries",
-    ],
+      "Learned how equity research works in practice, from collecting data and reading financial statements to following the market day to day. Developed a foundation in valuation and investment analysis by working alongside the investment team.",
+    highlights: [],
   },
   {
     type: "education",
     title: "Bachelor's in Business Administration (Finance)",
-    organization: "Tribhuvan University",
-    period: "2016 - 2020",
+    organization: "Kathmandu University",
+    period: "2021 - 2025",
     description:
       "Focused on corporate finance, investment management, and financial economics. Developed strong analytical and quantitative skills through coursework and independent research.",
     highlights: [
-      "Specialized in corporate finance and investment analysis",
-      "Completed coursework in financial economics and portfolio theory",
-      "Active member of the university finance and investment club",
+      "Business Clinic Head",
+      "Finance Head at Bizstyles",
     ],
   },
   {
     type: "certification",
     title: "CFA Level I Candidate",
     organization: "CFA Institute",
-    period: "2023",
+    period: "2026",
     description:
       "Pursuing the Chartered Financial Analyst designation to deepen expertise in investment analysis, portfolio management, and ethical standards.",
-    highlights: [
-      "Studying quantitative methods, economics, and financial reporting",
-      "Deepening knowledge of equity valuation and fixed-income analysis",
-    ],
+    highlights: [],
   },
 ];
 
@@ -63,6 +49,21 @@ const iconMap = {
   education: GraduationCap,
   certification: Award,
 };
+
+const tabs = [
+  {
+    id: "timeline",
+    label: "Investment",
+    icon: TrendingUp,
+    items: experiences.filter((e) => e.type === "work"),
+  },
+  {
+    id: "academics",
+    label: "Academics",
+    icon: GraduationCap,
+    items: experiences.filter((e) => e.type !== "work"),
+  },
+];
 ---
 
 <BaseLayout
@@ -74,19 +75,49 @@ const iconMap = {
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-extrabold text-white mb-4">Professional Journey</h1>
       <p class="text-lg text-gray-400 max-w-2xl">
-        A timeline of my career milestones, from academic foundations to professional achievements in investment analysis.
+        My investment career timeline and academic foundations.
       </p>
     </div>
   </section>
 
-  <!-- Timeline -->
-  <section class="py-20">
+  <!-- Tabs + Timelines -->
+  <section class="pt-12 pb-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        role="tablist"
+        aria-label="Experience sections"
+        class="flex w-full sm:w-fit mx-auto mb-14 p-1 gap-1 rounded-full bg-primary-900/40 border border-primary-800/50"
+      >
+        {tabs.map((tab, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${tab.id}`}
+            data-tab={tab.id}
+            aria-controls={`panel-${tab.id}`}
+            aria-selected={i === 0 ? "true" : "false"}
+            tabindex={i === 0 ? 0 : -1}
+            class="tab-btn flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-gray-400 hover:text-white transition-colors aria-selected:bg-accent-500/10 aria-selected:text-accent-400"
+          >
+            <tab.icon class="w-4 h-4" />
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {tabs.map((tab, i) => (
+        <div
+          role="tabpanel"
+          id={`panel-${tab.id}`}
+          aria-labelledby={`tab-${tab.id}`}
+          hidden={i !== 0}
+          class="tab-panel"
+        >
       <div class="relative">
         <!-- Vertical Line -->
         <div class="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-primary-800"></div>
 
-        {experiences.map((exp, index) => {
+        {tab.items.map((exp, index) => {
           const Icon = iconMap[exp.type as keyof typeof iconMap];
           const isLeft = index % 2 === 0;
 
@@ -110,21 +141,55 @@ const iconMap = {
                   </span>
                   <h3 class="text-xl font-bold text-white mb-1">{exp.title}</h3>
                   <p class="text-accent-400 text-sm font-medium mb-3">{exp.organization}</p>
-                  <p class="text-gray-400 text-sm leading-relaxed mb-4">{exp.description}</p>
-                  <ul class="space-y-2">
-                    {exp.highlights.map((item) => (
-                      <li class="flex items-start gap-2 text-sm text-gray-500">
-                        <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  {exp.description && (
+                    <p class:list={["text-gray-400 text-sm leading-relaxed", exp.highlights.length > 0 && "mb-4"]}>{exp.description}</p>
+                  )}
+                  {exp.highlights.length > 0 && (
+                    <ul class="space-y-2">
+                      {exp.highlights.map((item) => (
+                        <li class="flex items-start gap-2 text-sm text-gray-500">
+                          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-500 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             </div>
           );
         })}
       </div>
+        </div>
+      ))}
     </div>
   </section>
+
+  <script>
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>(".tab-btn"));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>(".tab-panel"));
+
+    function select(id: string, focus = false) {
+      tabs.forEach((t) => {
+        const on = t.dataset.tab === id;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on && focus) t.focus();
+      });
+      panels.forEach((p) => (p.hidden = p.id !== `panel-${id}`));
+      history.replaceState(null, "", `#${id}`);
+    }
+
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(t.dataset.tab!));
+      t.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        const step = e.key === "ArrowRight" ? 1 : -1;
+        select(tabs[(i + step + tabs.length) % tabs.length].dataset.tab!, true);
+      });
+    });
+
+    const initial = location.hash.slice(1);
+    if (tabs.some((t) => t.dataset.tab === initial)) select(initial);
+  </script>
 </BaseLayout>

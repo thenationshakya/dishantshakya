@@ -25,7 +25,7 @@ const personSchema = {
   "@type": "Person",
   name: "Dishant Shakya",
   jobTitle: "Investment Analyst",
-  email: "dishant.shakya@nationalcapital.com.np",
+  email: "dishantshakya01@gmail.com",
   telephone: "+977-9841051475",
   url: siteUrl,
   sameAs: ["https://www.linkedin.com/in/dishant-shakya-671b8a297/"],
@@ -48,6 +48,21 @@ const professionalServiceSchema = {
   areaServed: "Nepal",
   serviceType: ["Investment Analysis", "Equity Research", "Financial Modeling", "Market Analysis"],
 };
+
+const articleSchema = articleDate
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title.replace(/ | Dishant Shakya$/, ""),
+      description,
+      datePublished: articleDate,
+      dateModified: articleDate,
+      image: fullOgImage,
+      mainEntityOfPage: canonical,
+      author: { "@type": "Person", name: "Dishant Shakya", url: siteUrl },
+      publisher: { "@type": "Person", name: "Dishant Shakya", url: siteUrl },
+    }
+  : null;
 ---
 
 <meta charset="utf-8" />
@@ -59,6 +74,8 @@ const professionalServiceSchema = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 
 <!-- Open Graph -->
 <meta property="og:type" content={ogType} />
@@ -66,6 +83,9 @@ const professionalServiceSchema = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={fullOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Dishant Shakya, Investment Analyst" />
 <meta property="og:site_name" content="Dishant Shakya" />
 <meta property="og:locale" content="en_US" />
 
@@ -89,3 +109,4 @@ const professionalServiceSchema = {
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}

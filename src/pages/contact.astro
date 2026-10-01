@@ -25,7 +25,7 @@ import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-astro";
           <h2 class="text-2xl font-bold text-white mb-6">Contact Information</h2>
           <div class="space-y-6">
             <a
-              href="mailto:dishant.shakya@nationalcapital.com.np"
+              href="mailto:dishantshakya01@gmail.com"
               class="flex items-start gap-4 group"
             >
               <div class="w-10 h-10 rounded-lg bg-accent-500/10 flex items-center justify-center shrink-0 group-hover:bg-accent-500/20 transition-colors">
@@ -34,7 +34,7 @@ import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-astro";
               <div>
                 <p class="text-sm text-gray-500 mb-0.5">Email</p>
                 <p class="text-gray-300 group-hover:text-accent-400 transition-colors">
-                  dishant.shakya@nationalcapital.com.np
+                  dishantshakya01@gmail.com
                 </p>
               </div>
             </a>
@@ -82,8 +82,11 @@ import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-astro";
 
         <!-- Contact Form -->
         <div class="lg:col-span-3">
-          <form class="p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50">
+          <form id="contact-form" class="p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50">
             <h2 class="text-2xl font-bold text-white mb-6">Send a Message</h2>
+            <input type="hidden" name="access_key" value="3a293181-100b-4fa2-a711-8223b3851a30" />
+            <input type="hidden" name="from_name" value="Portfolio Contact Form" />
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
@@ -131,15 +134,58 @@ import { Mail, Phone, Linkedin, MapPin, Send } from "lucide-astro";
               ></textarea>
             </div>
             <button
+              id="submit-btn"
               type="submit"
-              class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
+              class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-accent-500 hover:bg-accent-600 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors w-full sm:w-auto justify-center"
             >
-              Send Message
+              <span id="submit-label">Send</span>
               <Send class="w-4 h-4" />
             </button>
+            <p id="form-status" role="status" aria-live="polite" class="mt-4 text-sm hidden"></p>
           </form>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const button = document.getElementById("submit-btn") as HTMLButtonElement;
+  const label = document.getElementById("submit-label") as HTMLElement;
+  const status = document.getElementById("form-status") as HTMLElement;
+
+  function show(message: string, ok: boolean) {
+    status.textContent = message;
+    status.classList.remove("hidden", "text-green-400", "text-red-400");
+    status.classList.add(ok ? "text-green-400" : "text-red-400");
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    label.textContent = "Sending...";
+    status.classList.add("hidden");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        form.reset();
+        show("Thanks! Your message has been sent. I'll get back to you soon.", true);
+      } else {
+        show("Something went wrong. Please try again or email me directly.", false);
+      }
+    } catch {
+      show("Could not send your message. Please check your connection and try again.", false);
+    } finally {
+      button.disabled = false;
+      label.textContent = "Send";
+    }
+  });
+
+</script>

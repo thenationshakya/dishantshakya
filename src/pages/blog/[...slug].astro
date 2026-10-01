@@ -60,9 +60,34 @@ const { Content } = await render(post);
       </header>
 
       <!-- Article Content -->
-      <div class="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-accent-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:text-accent-400 prose-pre:bg-primary-900 prose-pre:border prose-pre:border-primary-800/50">
+      <div class="blog-content">
         <Content />
       </div>
     </div>
   </article>
 </BaseLayout>
+
+<style is:global>
+  .blog-content { font-size: 1.125rem; line-height: 1.85; color: #d1d5db; }
+  .blog-content > * + * { margin-top: 1.75rem; }
+  .blog-content h2 { margin-top: 4rem; margin-bottom: 1.25rem; font-size: 1.875rem; line-height: 1.25; font-weight: 800; color: #fff; scroll-margin-top: 6rem; }
+  .blog-content h2 + * { margin-top: 0; }
+  .blog-content h3 { margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.375rem; font-weight: 700; color: #fff; }
+  .blog-content p { margin: 0; }
+  .blog-content > p + p { margin-top: 1.75rem; }
+  .blog-content strong { color: #fff; font-weight: 700; }
+  .blog-content a { color: #38bdf8; }
+  .blog-content a:hover { text-decoration: underline; }
+  .blog-content ul, .blog-content ol { margin-top: 1.75rem; padding-left: 1.75rem; }
+  .blog-content ul { list-style: disc outside; }
+  .blog-content ol { list-style: decimal outside; }
+  .blog-content li { margin-top: 0.875rem; padding-left: 0.5rem; }
+  .blog-content li:first-child { margin-top: 0; }
+  .blog-content li::marker { color: #38bdf8; font-weight: 600; }
+  .blog-content blockquote { margin: 2.5rem 0; padding: 1rem 1.5rem; border-left: 4px solid #0ea5e9; background: rgba(14, 165, 233, 0.06); border-radius: 0 0.75rem 0.75rem 0; color: #e5e7eb; }
+  .blog-content blockquote p { margin: 0; }
+  .blog-content img { display: block; width: 100%; max-width: 36rem; height: auto; margin: 3rem auto 0.75rem; border-radius: 0.75rem; border: 1px solid rgba(30, 58, 95, 0.5); }
+  .blog-content em { display: block; text-align: center; font-size: 0.875rem; font-style: normal; color: #6b7280; margin-bottom: 1rem; }
+  .blog-content p:has(> img) { margin-top: 0; }
+  .blog-content code { color: #38bdf8; }
+</style>
