@@ -40,7 +40,7 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
           <div class="mt-8 flex flex-wrap gap-4">
             <a
               href="/contact"
-              class="inline-flex items-center gap-2 px-6 py-3 bg-accent-500 hover:bg-accent-600 text-white font-semibold rounded-lg transition-colors"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-[#0369a1] hover:bg-[#075985] text-white font-semibold rounded-lg transition-colors"
             >
               Get in Touch
               <ArrowRight class="w-4 h-4" />
@@ -68,7 +68,7 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
                 loading="eager"
               />
             </div>
-            <div class="absolute -top-2 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
+            <div id="available-badge" class="hidden absolute -top-2 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
               <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
               <p class="text-xs text-gray-400">Available</p>
             </div>
@@ -120,15 +120,15 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
             competitive positioning, and valuation modeling.
           </p>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Fundamental Analysis
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Valuation Techniques
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Sector Research
             </li>
@@ -146,15 +146,15 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
             and scenario-based projections for investment decisions.
           </p>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               DCF Models
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Comparable Analysis
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Scenario Analysis
             </li>
@@ -172,15 +172,15 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
             and regulatory impacts on Nepal's financial markets.
           </p>
           <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Macro Analysis
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Technical Analysis
             </li>
-            <li class="flex items-center gap-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2 text-sm text-gray-400">
               <ChevronRight class="w-3 h-3 text-accent-500" />
               Regulatory Impact
             </li>
@@ -199,7 +199,7 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
       </p>
       <a
         href="/contact"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-accent-500 hover:bg-accent-600 text-white font-semibold rounded-lg transition-colors"
+        class="inline-flex items-center gap-2 px-8 py-3 bg-[#0369a1] hover:bg-[#075985] text-white font-semibold rounded-lg transition-colors"
       >
         Contact Me
         <ArrowRight class="w-4 h-4" />
@@ -207,3 +207,23 @@ import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "luci
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Show the "Available" badge only between 8:00 and 19:00 Nepal time.
+  const badge = document.getElementById("available-badge");
+
+  function updateBadge() {
+    if (!badge) return;
+    const hour = Number(
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Kathmandu",
+        hour: "numeric",
+        hourCycle: "h23",
+      }).format(new Date())
+    );
+    badge.classList.toggle("hidden", !(hour >= 8 && hour < 19));
+  }
+
+  updateBadge();
+  setInterval(updateBadge, 60_000);
+</script>
