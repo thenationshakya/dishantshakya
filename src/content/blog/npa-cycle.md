@@ -99,17 +99,17 @@ FY 2025/26 saw a rise to Rs 34.0 billion, during a year of political instability
 
 ## What comes next: fewer bad loans, better profits
 
-We believe the worst of this cycle is behind us, for three reasons:
+I believe the worst of this cycle is behind us, for three reasons:
 
 - **The economy is recovering.** As businesses earn more, fewer borrowers will fall behind on payments.
 - **Borrowing is much cheaper.** Loan rates have fallen from about 12% to under 7%. For a borrower, that is a big cut in the monthly payment, which makes it easier to keep up.
 - **The weak loans have been found.** Most of the risky loans made during the boom have already been tested and counted as bad.
 
-As the recovery takes hold, we expect bad loans to start softening. The path may not be smooth, and bad loans could still tick up for a quarter or two, but the cycle suggests the peak is near.
+As the recovery takes hold, I expect bad loans to start softening. The path may not be smooth, and bad loans could still tick up for a quarter or two, but the cycle suggests the peak is near.
 
 This matters for bank profits. The money banks set aside for bad loans comes straight out of their profits. When a struggling borrower recovers and starts paying again, the bank can release that money back, and it flows back into profit. Fewer new bad loans also mean less needs to be set aside in the first place. Both help profits.
 
-There is one catch. With interest rates this low, banks earn less on every loan they make, so their margins will stay thin for now. The real boost to profits will come when people and businesses start borrowing again. If the economy moves from recovery into a full expansion, we expect bank profits not only to rise but to stay at a higher level.
+There is one catch. With interest rates this low, banks earn less on every loan they make, so their margins will stay thin for now. The real boost to profits will come when people and businesses start borrowing again. If the economy moves from recovery into a full expansion, I expect bank profits not only to rise but to stay at a higher level.
 
 > **In short:** as bad loans soften, money set aside comes back as profit; when lending picks up, profits should follow.
 
