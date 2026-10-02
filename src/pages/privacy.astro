@@ -1,0 +1,92 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const sections = [
+  {
+    title: "What I collect",
+    body: [
+      "When you use the contact form, I receive the details you type in: your name, email address, subject and message. I do not collect anything else through the form.",
+    ],
+  },
+  {
+    title: "Why I collect it",
+    body: [
+      "Only to read your message and reply to it. I do not use your details for marketing, and I do not add you to any mailing list.",
+    ],
+  },
+  {
+    title: "Who handles your data",
+    body: [
+      "Your message is delivered to my email inbox through Web3Forms, a form delivery service. They process the submission on my behalf so that it reaches me.",
+      "This website is hosted on GitHub Pages and served through Cloudflare. Like most hosting providers, they may record technical information such as your IP address and browser type when you visit.",
+      "The site loads its font (Inter) from Google Fonts, which means your browser contacts Google's servers when a page loads.",
+    ],
+  },
+  {
+    title: "Cookies and analytics",
+    body: [
+      "This site does not use advertising cookies or analytics tools. If that changes, I will update this page.",
+    ],
+  },
+  {
+    title: "How long I keep it",
+    body: [
+      "I keep your message and email address for as long as needed to respond and follow up on your enquiry. After that, I delete them.",
+    ],
+  },
+  {
+    title: "I do not sell your data",
+    body: [
+      "I do not sell, rent or share your personal details with anyone, except the service providers listed above that are needed to run this website and deliver your message.",
+    ],
+  },
+  {
+    title: "Your choices",
+    body: [
+      "You can ask me at any time to see, correct or delete the details you sent me. Email me at the address below and I will respond as soon as I can.",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy | Dishant Shakya"
+  description="How Dishant Shakya collects, uses and protects the personal details you share through this website's contact form."
+>
+  <section class="py-20 bg-primary-900/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-extrabold text-white mb-4">Privacy Policy</h1>
+      <p class="text-lg text-gray-400 max-w-2xl">
+        A short, plain-language explanation of what happens to the details you share on this website.
+      </p>
+      <p class="mt-4 text-sm text-gray-500">Last updated: 2 October 2026</p>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-12">
+        {sections.map((section) => (
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-4">{section.title}</h2>
+            <div class="space-y-4">
+              {section.body.map((paragraph) => (
+                <p class="text-gray-300 leading-8">{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div class="p-6 rounded-2xl bg-primary-900/40 border border-primary-800/50">
+          <h2 class="text-xl font-bold text-white mb-2">Questions or requests</h2>
+          <p class="text-gray-300 leading-8">
+            Contact me at
+            <a href="mailto:dishantshakya01@gmail.com" class="text-accent-400 hover:underline">dishantshakya01@gmail.com</a>
+            or through the
+            <a href="/contact" class="text-accent-400 hover:underline">contact page</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
