@@ -2,6 +2,7 @@
 import SEO from "../components/SEO.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import "../styles/site.css";
 
 export interface Props {
   title: string;
@@ -17,6 +18,7 @@ const { title, description, ogImage, ogType, articleDate } = Astro.props;
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
+    <script is:inline>document.documentElement.classList.add("js")</script>
     <SEO
       title={title}
       description={description}
@@ -25,12 +27,15 @@ const { title, description, ogImage, ogType, articleDate } = Astro.props;
       articleDate={articleDate}
     />
   </head>
-  <body class="bg-primary-950 text-gray-100 font-sans antialiased">
+  <body class="font-sans antialiased">
     <Header />
-    <main class="pt-16">
+    <main class="site-main pt-16">
       <slot />
     </main>
     <Footer />
+    <script>
+      import "../scripts/motion";
+    </script>
   </body>
 </html>
 
@@ -43,5 +48,11 @@ const { title, description, ogImage, ogType, articleDate } = Astro.props;
   html {
     scrollbar-width: thin;
     scrollbar-color: #1e3a5f #091628;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 </style>

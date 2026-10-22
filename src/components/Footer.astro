@@ -1,68 +1,93 @@
 ---
-import { Linkedin, Mail, Phone } from "lucide-astro";
 ---
 
-<footer class="bg-primary-950 border-t border-primary-800/50">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Brand -->
-      <div>
-        <a href="/" class="text-xl font-bold text-white tracking-tight">
-          Dishant<span class="text-accent-400">.</span>
-        </a>
-        <p class="mt-3 text-gray-400 text-sm leading-relaxed">
-          Investment Analyst specializing in equity research, financial modeling, and market analysis.
-        </p>
-      </div>
-
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li><a href="/" class="text-sm text-gray-400 hover:text-accent-400 transition-colors">Home</a></li>
-          <li><a href="/experience" class="text-sm text-gray-400 hover:text-accent-400 transition-colors">Experience</a></li>
-          <li><a href="/blog" class="text-sm text-gray-400 hover:text-accent-400 transition-colors">Blog</a></li>
-          <li><a href="/contact" class="text-sm text-gray-400 hover:text-accent-400 transition-colors">Contact</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Get in Touch</h3>
-        <ul class="space-y-3">
-          <li>
-            <a href="mailto:dishantshakya01@gmail.com" class="flex items-center gap-2 text-sm text-gray-400 hover:text-accent-400 transition-colors">
-              <Mail class="w-4 h-4" />
-              dishantshakya01@gmail.com
-            </a>
-          </li>
-          <li>
-            <a href="tel:+9779841051475" class="flex items-center gap-2 text-sm text-gray-400 hover:text-accent-400 transition-colors">
-              <Phone class="w-4 h-4" />
-              +977 9841051475
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/dishant-shakya-671b8a297/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm text-gray-400 hover:text-accent-400 transition-colors">
-              <Linkedin class="w-4 h-4" />
-              LinkedIn
-            </a>
-          </li>
-        </ul>
-      </div>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <a href="/" class="site-footer__mark">Dishant<span>.</span></a>
+      <p>Investment analyst at National Capital, Kathmandu. Usually reachable 8:00 to 19:00 Nepal time.</p>
     </div>
 
-    <div class="mt-10 pt-8 border-t border-primary-800/50 text-center">
-      <p class="text-sm text-gray-400">
-        &copy; <span id="footer-year">{new Date().getFullYear()}</span> Dishant Shakya. All rights reserved.
-        <span class="mx-2">&middot;</span>
-        <a href="/privacy" class="hover:text-accent-400 transition-colors">Privacy Policy</a>
-      </p>
+    <div>
+      <h2 class="site-footer__title">Pages</h2>
+      <ul>
+        <li><a class="link" href="/">Home</a></li>
+        <li><a class="link" href="/experience">Experience</a></li>
+        <li><a class="link" href="/blog">Blog</a></li>
+        <li><a class="link" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Write or call</h2>
+      <ul>
+        <li><a class="link" href="mailto:dishantshakya01@gmail.com">dishantshakya01@gmail.com</a></li>
+        <li><a class="link" href="tel:+9779841051475">+977 9841051475</a></li>
+        <li>
+          <a class="link" href="https://www.linkedin.com/in/dishant-shakya-671b8a297/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+      </ul>
     </div>
   </div>
+
+  <p class="site-footer__legal">
+    &copy; <span id="footer-year">{new Date().getFullYear()}</span> Dishant Shakya.
+    <a class="link" href="/privacy">Privacy Policy</a>
+  </p>
 </footer>
 
 <script>
   const year = document.getElementById("footer-year");
   if (year) year.textContent = String(new Date().getFullYear());
 </script>
+
+<style>
+  .site-footer {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 72px var(--margin) 32px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .site-footer__inner {
+    display: grid;
+    gap: 40px var(--gutter);
+  }
+  .site-footer__brand p {
+    margin-top: 12px;
+    max-width: 34ch;
+  }
+  .site-footer__mark {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .site-footer__mark span {
+    color: var(--accent);
+  }
+  .site-footer ul {
+    display: grid;
+    gap: 6px;
+  }
+  .site-footer__title {
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .site-footer__legal {
+    margin-top: 64px;
+    font-size: 14px;
+  }
+  .site-footer__legal a {
+    margin-left: 8px;
+  }
+
+  @media (min-width: 720px) {
+    .site-footer__inner {
+      grid-template-columns: 2fr 1fr 1.4fr;
+    }
+  }
+</style>

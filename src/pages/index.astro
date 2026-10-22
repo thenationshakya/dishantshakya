@@ -1,229 +1,757 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TrendingUp, BarChart3, LineChart, ArrowRight, ChevronRight } from "lucide-astro";
+
+const NOTE_URL = "/blog/npa-cycle";
+
+// From the note's figures 2 and 5 (commercial banks' Q4 reports; NRB for growth to 2024/25).
+const years = [
+  { fy: "2020/21", npl: 1.21, loans: 27.3, deposits: 21.4, phase: "The boom. Loans grow faster than the deposits that fund them." },
+  { fy: "2021/22", npl: 1.05, loans: 13.1, deposits: 9.0, phase: "The peak. Banks hit NRB's lending limit and bad loans are at their lowest." },
+  { fy: "2022/23", npl: 2.79, loans: 3.8, deposits: 12.3, phase: "The turn. Deposits overtake loans; lending rates reach 12.30%." },
+  { fy: "2023/24", npl: 3.53, loans: 5.8, deposits: 13.0, phase: "The downturn. Loans made in the boom start to fail." },
+  { fy: "2024/25", npl: 4.25, loans: 8.4, deposits: 12.6, phase: "Recovery begins, but bad loans keep rising with a lag." },
+  { fy: "2025/26", npl: 5.28, loans: 7.19, deposits: 13.1, phase: "Early recovery. The note argues bad loans are near their peak." },
+];
+const current = years.at(-1)!;
+const nplMax = 6;
+const fmt = (n: number) => n.toFixed(2);
+
+const practice = [
+  { title: "Equity research", text: "Fundamental analysis of listed companies: financial statements, competitive position and valuation.", tags: "Statements · Valuation · Sectors" },
+  { title: "Financial modeling", text: "DCF, comparable-company and scenario models that turn assumptions into a number someone can act on.", tags: "DCF · Comparables · Scenarios" },
+  { title: "Market analysis", text: "Macroeconomic trends, sector dynamics and NRB policy, and how they reach Nepal's listed companies.", tags: "Macro · Technical · Regulation" },
+];
+
+const record = [
+  {
+    title: "Investment Analyst",
+    org: "National Capital",
+    period: "Aug 2025 to now",
+    text: "Equity research and fundamental analysis across Nepal's listed companies. Building financial models, tracking sector and macroeconomic developments, and preparing research that supports investment decisions.",
+    open: true,
+  },
+  {
+    title: "Intern",
+    org: "National Capital",
+    period: "Nov 2024 to Jan 2025",
+    text: "Learned equity research in practice, from collecting data and reading financial statements to following the market day to day, alongside the investment team.",
+  },
+  {
+    title: "BBA in Finance",
+    org: "Kathmandu University",
+    period: "2021 to 2025",
+    text: "Corporate finance, investment management and financial economics. Business Clinic Head, and Finance Head at Bizstyles.",
+  },
+  {
+    title: "CFA Level I candidate",
+    org: "CFA Institute",
+    period: "2026",
+    text: "Working toward the Chartered Financial Analyst designation: investment analysis, portfolio management and ethical standards.",
+  },
+];
 ---
 
 <BaseLayout
   title="Dishant Shakya | Investment Analyst"
-  description="Dishant Shakya is an Investment Analyst specializing in equity research, financial modeling, and market analysis. Driving data-driven investment decisions."
+  description="Dishant Shakya is an Investment Analyst at National Capital in Kathmandu, researching Nepal's listed companies and banks through equity research, financial modeling and market analysis."
 >
-  <!-- Hero Section -->
-  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
-    <!-- Background Grid Pattern -->
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(15,36,64,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(15,36,64,0.8)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-primary-950 via-transparent to-primary-950"></div>
-
-    <!-- Accent Glow -->
-    <div class="absolute top-1/4 -right-32 w-96 h-96 bg-accent-500/10 rounded-full blur-[128px]"></div>
-    <div class="absolute bottom-1/4 -left-32 w-96 h-96 bg-primary-600/10 rounded-full blur-[128px]"></div>
-
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-500/10 border border-accent-500/20 text-accent-400 text-sm font-medium mb-6">
-            <TrendingUp class="w-4 h-4" />
-            Investment Analyst
-          </div>
-
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-            Turning Data Into
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-blue-400">
-              Investment Insight
-            </span>
-          </h1>
-
-          <p class="mt-6 text-lg text-gray-400 leading-relaxed max-w-lg">
-            I'm <strong class="text-white">Dishant Shakya</strong>, an Investment Analyst with a passion for
-            uncovering value through rigorous equity research, financial modeling, and strategic market analysis.
-          </p>
-
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a
-              href="/contact"
-              class="inline-flex items-center gap-2 px-6 py-3 bg-[#0369a1] hover:bg-[#075985] text-white font-semibold rounded-lg transition-colors"
-            >
-              Get in Touch
-              <ArrowRight class="w-4 h-4" />
-            </a>
-            <a
-              href="/experience"
-              class="inline-flex items-center gap-2 px-6 py-3 border border-primary-700 hover:border-primary-600 text-gray-300 hover:text-white font-semibold rounded-lg transition-colors"
-            >
-              View Experience
-            </a>
-          </div>
-        </div>
-
-        <!-- Hero Visual - Profile Photo -->
-        <div class="flex justify-center order-first lg:order-none">
-          <div class="relative">
-            <div class="absolute -inset-4 bg-gradient-to-r from-accent-500/20 to-primary-600/20 rounded-full blur-2xl"></div>
-            <div class="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-primary-800/50 shadow-2xl shadow-accent-500/10">
-              <img
-                src="/dishant-shakya.jpg"
-                alt="Dishant Shakya - Investment Analyst"
-                class="w-full h-full object-cover"
-                width="320"
-                height="320"
-                loading="eager"
-              />
-            </div>
-            <div id="available-badge" class="hidden absolute -top-2 right-4 flex items-center gap-2 px-3 py-1.5 bg-primary-900/90 backdrop-blur-sm border border-primary-800/50 rounded-xl">
-              <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-              <p class="text-xs text-gray-400">Available</p>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- Hero -->
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <h1 id="hero-title" class="hero__title">
+      <span class="hero__line"><span data-line style="--i:0">Dishant Shakya</span></span>
+    </h1>
+    <p class="hero__lead" data-load style="--d:300ms">
+      Investment analyst at National Capital, Kathmandu. I research Nepal's listed companies and banks, and write
+      about what their numbers say.
+    </p>
+    <div class="hero__actions" data-load style="--d:400ms">
+      <a href="/contact" class="button">Get in touch <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a href={NOTE_URL} class="button button--ghost">Read my latest note</a>
     </div>
-  </section>
 
-  <!-- About Section -->
-  <section class="py-20 bg-primary-900/30">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <h2 class="text-sm font-semibold text-accent-400 uppercase tracking-wider mb-3">About Me</h2>
-        <h3 class="text-3xl font-bold text-white mb-6">
-          Bridging Finance and Strategy
-        </h3>
-        <p class="text-gray-400 leading-relaxed mb-4">
-          As an Investment Analyst at National Capital, I specialize in evaluating investment opportunities
-          across Nepal's capital markets. My approach combines quantitative analysis with qualitative
-          insights to deliver comprehensive investment recommendations.
-        </p>
-        <p class="text-gray-400 leading-relaxed">
-          I believe that disciplined research and data-driven methodologies are the foundation of
-          sound investment decisions. Whether it's building DCF models, conducting sector analysis,
-          or assessing macroeconomic trends, I bring analytical rigor to every project.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Expertise Section -->
-  <section class="py-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <h2 class="text-sm font-semibold text-accent-400 uppercase tracking-wider mb-3">Expertise</h2>
-        <h3 class="text-3xl font-bold text-white">Core Competencies</h3>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Equity Research -->
-        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
-            <TrendingUp class="w-6 h-6 text-accent-400" />
-          </div>
-          <h4 class="text-xl font-semibold text-white mb-3">Equity Research</h4>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            In-depth fundamental analysis of listed companies, including financial statement analysis,
-            competitive positioning, and valuation modeling.
-          </p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Fundamental Analysis
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Valuation Techniques
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Sector Research
-            </li>
-          </ul>
-        </div>
-
-        <!-- Financial Modeling -->
-        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
-            <BarChart3 class="w-6 h-6 text-accent-400" />
-          </div>
-          <h4 class="text-xl font-semibold text-white mb-3">Financial Modeling</h4>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Building robust financial models including DCF, comparable company analysis,
-            and scenario-based projections for investment decisions.
-          </p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              DCF Models
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Comparable Analysis
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Scenario Analysis
-            </li>
-          </ul>
-        </div>
-
-        <!-- Market Analysis -->
-        <div class="group p-8 rounded-2xl bg-primary-900/40 border border-primary-800/50 hover:border-accent-500/30 transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-accent-500/10 flex items-center justify-center mb-5 group-hover:bg-accent-500/20 transition-colors">
-            <LineChart class="w-6 h-6 text-accent-400" />
-          </div>
-          <h4 class="text-xl font-semibold text-white mb-3">Market Analysis</h4>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            Comprehensive market research covering macroeconomic trends, sector dynamics,
-            and regulatory impacts on Nepal's financial markets.
-          </p>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Macro Analysis
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Technical Analysis
-            </li>
-            <li class="flex items-center gap-2 text-sm text-gray-400">
-              <ChevronRight class="w-3 h-3 text-accent-500" />
-              Regulatory Impact
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-20 bg-primary-900/30">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-4">Let's Discuss Investment Opportunities</h2>
-      <p class="text-gray-400 max-w-xl mx-auto mb-8">
-        Looking for investment insights or professional analysis? I'd love to connect and explore how I can help.
+    <!-- The panel: portrait beside the live cycle -->
+    <div class="panel" data-load style="--d:520ms">
+      <p class="panel__clock" aria-live="off">
+        <span class="panel__dot" data-clock-dot aria-hidden="true"></span>
+        <span data-clock>Kathmandu, UTC+5:45</span>
       </p>
-      <a
-        href="/contact"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-[#0369a1] hover:bg-[#075985] text-white font-semibold rounded-lg transition-colors"
-      >
-        Contact Me
-        <ArrowRight class="w-4 h-4" />
-      </a>
+
+      <figure class="panel__portrait">
+        <img
+          src="/dishant-shakya.jpg"
+          alt="Dishant Shakya in a navy pinstripe suit"
+          width="800"
+          height="1117"
+          fetchpriority="high"
+          loading="eager"
+        />
+      </figure>
+
+      <div class="cycle" data-cycle data-ui>
+        <div class="cycle__head">
+          <h2 class="cycle__title">Nepal's banks, year by year</h2>
+          <p class="cycle__how">Pick a fiscal year: the NPL ratio, and how fast loans and deposits grew. From my NPA cycle note.</p>
+        </div>
+
+        <dl class="cycle__stats">
+          <div class="cycle__stat">
+            <dt>NPL ratio</dt>
+            <dd class="tabular"><span data-value="npl">{fmt(current.npl)}</span>%</dd>
+          </div>
+          <div class="cycle__stat">
+            <dt>Loans</dt>
+            <dd class="tabular"><span data-value="loans">{fmt(current.loans)}</span>%</dd>
+          </div>
+          <div class="cycle__stat">
+            <dt>Deposits</dt>
+            <dd class="tabular"><span data-value="deposits">{fmt(current.deposits)}</span>%</dd>
+          </div>
+        </dl>
+
+        <div class="cycle__bars" role="group" aria-label="Fiscal year">
+          {years.map((y) => (
+            <button
+              type="button"
+              class="cycle__bar"
+              aria-pressed={y === current ? "true" : "false"}
+              aria-label={`FY ${y.fy}: NPL ratio ${fmt(y.npl)}%`}
+              data-year={JSON.stringify(y)}
+            >
+              <span class="cycle__track"><span class="cycle__fill" style={`--h:${y.npl / nplMax}`}></span></span>
+              <span class="cycle__fy tabular" aria-hidden="true">
+                <span class="fy-long">{y.fy}</span><span class="fy-short">{y.fy.slice(2)}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <p class="cycle__phase" aria-live="polite">
+          <span class="cycle__fyname" data-value="fy">FY {current.fy}</span>
+          <span data-value="phase">{current.phase}</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice -->
+  <section class="section wrap" aria-labelledby="practice-title">
+    <header class="section__head">
+      <h2 id="practice-title" class="t-head" data-lines>What I work on</h2>
+      <p class="section__sub" data-reveal>Three kinds of work, one aim: research the investment team can act on.</p>
+    </header>
+
+    <div class="cards">
+      {practice.map((p, i) => (
+        <article class="card" data-reveal style={`--i:${i}`}>
+          <h3 class="card__title">{p.title}</h3>
+          <p class="card__text">{p.text}</p>
+          <p class="card__tags">{p.tags}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section wrap" aria-labelledby="record-title">
+    <header class="section__head">
+      <h2 id="record-title" class="t-head" data-lines>Experience and study</h2>
+      <p class="section__sub" data-reveal>Open a row for the detail, or see <a class="link" href="/experience">the full timeline</a>.</p>
+    </header>
+
+    <div class="record">
+      {record.map((r, i) => (
+        <details class="record__item" open={r.open} data-reveal style={`--i:${i}`}>
+          <summary>
+            <span class="record__name">
+              <strong>{r.title}</strong>
+              <span>{r.org}</span>
+            </span>
+            <span class="record__period tabular">{r.period}</span>
+            <span class="record__chev" aria-hidden="true"></span>
+          </summary>
+          <div class="record__body"><p>{r.text}</p></div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="wrap" aria-labelledby="reach-title">
+    <div class="reach" data-reveal>
+      <h2 id="reach-title" class="t-head">Let's talk</h2>
+      <p class="section__sub">Write to me about research, analyst work or Nepal's markets.</p>
+      <div class="reach__actions">
+        <a href="mailto:dishantshakya01@gmail.com" class="button">Email me <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <button type="button" class="button button--ghost" data-copy="dishantshakya01@gmail.com">
+          <span data-copy-label>Copy address</span>
+        </button>
+      </div>
+      <p class="reach__meta">dishantshakya01@gmail.com · +977 9841051475</p>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  // Show the "Available" badge only between 8:00 and 19:00 Nepal time.
-  const badge = document.getElementById("available-badge");
+  // Kathmandu clock: "Available" only between 8:00 and 19:00 Nepal time.
+  const clock = document.querySelector<HTMLElement>("[data-clock]");
+  const dot = document.querySelector<HTMLElement>("[data-clock-dot]");
+  const timeFmt = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kathmandu", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
 
-  function updateBadge() {
-    if (!badge) return;
-    const hour = Number(
-      new Intl.DateTimeFormat("en-US", {
-        timeZone: "Asia/Kathmandu",
-        hour: "numeric",
-        hourCycle: "h23",
-      }).format(new Date())
-    );
-    badge.classList.toggle("hidden", !(hour >= 8 && hour < 19));
+  function tick() {
+    if (!clock) return;
+    const hm = timeFmt.format(new Date());
+    const hour = Number(hm.slice(0, 2));
+    const open = hour >= 8 && hour < 19;
+    clock.textContent = open ? `${hm} in Kathmandu · Available now` : `${hm} in Kathmandu · Back at 8:00`;
+    dot?.classList.toggle("is-open", open);
+  }
+  tick();
+  setInterval(tick, 30_000);
+
+  // The cycle: pick a year, the figures roll to it.
+  const root = document.querySelector<HTMLElement>("[data-cycle]");
+  if (root) {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const out = (k: string) => root.querySelector<HTMLElement>(`[data-value="${k}"]`)!;
+    const shown: Record<string, number> = {
+      npl: parseFloat(out("npl").textContent!),
+      loans: parseFloat(out("loans").textContent!),
+      deposits: parseFloat(out("deposits").textContent!),
+    };
+
+    function roll(key: "npl" | "loans" | "deposits", to: number) {
+      const el = out(key);
+      const from = shown[key];
+      shown[key] = to;
+      if (reduce) {
+        el.textContent = to.toFixed(2);
+        return;
+      }
+      const start = performance.now();
+      const step = (t: number) => {
+        const p = Math.min(1, (t - start) / 600);
+        const e = 1 - Math.pow(1 - p, 4);
+        el.textContent = (from + (to - from) * e).toFixed(2);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const bars = [...root.querySelectorAll<HTMLButtonElement>(".cycle__bar")];
+    bars.forEach((bar, i) => {
+      bar.addEventListener("click", () => {
+        const y = JSON.parse(bar.dataset.year!);
+        bars.forEach((b) => b.setAttribute("aria-pressed", String(b === bar)));
+        roll("npl", y.npl);
+        roll("loans", y.loans);
+        roll("deposits", y.deposits);
+        out("fy").textContent = `FY ${y.fy}`;
+        const phase = out("phase");
+        phase.classList.remove("is-swapped");
+        void phase.offsetWidth;
+        phase.textContent = y.phase;
+        phase.classList.add("is-swapped");
+      });
+      bar.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        const next = bars[(i + (e.key === "ArrowRight" ? 1 : -1) + bars.length) % bars.length];
+        next.focus();
+        next.click();
+      });
+    });
   }
 
-  updateBadge();
-  setInterval(updateBadge, 60_000);
+  // Copy the address, with a moment of confirmation.
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    const label = btn.querySelector<HTMLElement>("[data-copy-label]")!;
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy!);
+        label.textContent = "Copied";
+      } catch {
+        label.textContent = "Press Ctrl+C";
+      }
+      setTimeout(() => (label.textContent = "Copy address"), 1800);
+    });
+  });
+
+  // Experience rows open and close with a height glide.
+  document.querySelectorAll<HTMLDetailsElement>(".record__item").forEach((d) => {
+    const summary = d.querySelector("summary")!;
+    const body = d.querySelector<HTMLElement>(".record__body")!;
+    summary.addEventListener("click", (e) => {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      e.preventDefault();
+      if (d.open) {
+        const anim = body.animate([{ height: `${body.offsetHeight}px`, opacity: 1 }, { height: "0px", opacity: 0 }], { duration: 220, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+        anim.onfinish = () => (d.open = false);
+      } else {
+        d.open = true;
+        body.animate([{ height: "0px", opacity: 0 }, { height: `${body.offsetHeight}px`, opacity: 1 }], { duration: 300, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+      }
+    });
+  });
 </script>
+
+<style>
+  /* Shared section frame */
+  .wrap {
+    max-width: 1120px;
+  }
+  .section {
+    padding-top: clamp(112px, 12vw, 176px);
+  }
+  .section__head {
+    max-width: 40rem;
+    margin: 0 auto clamp(48px, 6vw, 80px);
+    text-align: center;
+  }
+  .section__sub {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: clamp(72px, 9vw, 120px);
+    text-align: center;
+  }
+  .hero__title {
+    font-size: clamp(48px, 7.4vw, 104px);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+  .hero__line {
+    display: block;
+    overflow: clip;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .hero__line > span {
+    display: block;
+  }
+  .hero__lead {
+    max-width: 46ch;
+    margin: 24px auto 0;
+    color: var(--ink-soft);
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  /* Panel */
+  .panel {
+    position: relative;
+    display: grid;
+    gap: 12px;
+    margin-top: clamp(56px, 7vw, 88px);
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    text-align: left;
+    transform-origin: 50% 0;
+  }
+  .panel__clock {
+    position: absolute;
+    top: -20px;
+    left: 24px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .panel__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+  }
+  .panel__dot:global(.is-open) {
+    background: #4ade80;
+  }
+  .panel__portrait {
+    margin: 0;
+    overflow: clip;
+    border-radius: var(--radius-md);
+    aspect-ratio: 4 / 4;
+    background: #241a1c;
+  }
+  .panel__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    transition: transform 700ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .panel__portrait:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .panel {
+      grid-template-columns: 5fr 7fr;
+      padding: 14px;
+    }
+    .panel__portrait {
+      aspect-ratio: auto;
+      min-height: 520px;
+    }
+  }
+
+  /* The live cycle */
+  .cycle {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 20px 20px;
+    border-radius: var(--radius-md);
+    background: var(--ground);
+  }
+  @media (min-width: 900px) {
+    .cycle {
+      padding: 32px;
+    }
+  }
+  .cycle__title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .cycle__how {
+    margin-top: 6px;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .cycle__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .cycle__stat {
+    padding: 14px 14px 12px;
+    border-radius: 14px;
+    background: var(--surface);
+  }
+  .cycle__stat dt {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .cycle__stat dd {
+    margin-top: 4px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .cycle__bars {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+    flex: 1;
+    min-height: 180px;
+  }
+  .cycle__bar {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 8px;
+    min-width: 0;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: color var(--t-hover) ease;
+  }
+  .cycle__track {
+    position: relative;
+    display: block;
+    overflow: clip;
+    border-radius: 10px;
+  }
+  .cycle__fill {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: var(--surface-2);
+    transform-origin: bottom;
+    transform: scaleY(var(--h));
+    transition:
+      background-color var(--t-ui) ease,
+      transform 900ms var(--ease-expo);
+  }
+  .cycle__fy {
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .fy-short {
+    display: none;
+  }
+  .cycle__bar[aria-pressed="true"] {
+    color: var(--ink);
+  }
+  .cycle__bar[aria-pressed="true"] .cycle__fill {
+    background: var(--accent);
+  }
+  .cycle__bar:active .cycle__fill {
+    transform: scaleY(calc(var(--h) * 0.96));
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .cycle__bar:hover {
+      color: var(--ink);
+    }
+    .cycle__bar:hover:not([aria-pressed="true"]) .cycle__fill {
+      background: #1f4371;
+    }
+  }
+  @media (max-width: 480px) {
+    .fy-long {
+      display: none;
+    }
+    .fy-short {
+      display: inline;
+    }
+  }
+  .cycle__phase {
+    min-height: 3em;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .cycle__fyname {
+    margin-right: 6px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cycle__phase :global(.is-swapped) {
+      display: inline-block;
+      animation: swap-in 450ms var(--ease-out);
+    }
+    @keyframes swap-in {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+    }
+    :global(.js) .cycle__bar .cycle__fill {
+      animation: bar-grow 1000ms var(--ease-expo) both;
+      animation-delay: calc(700ms + var(--n, 0) * 60ms);
+    }
+    .cycle__bar:nth-child(2) .cycle__fill { --n: 1; }
+    .cycle__bar:nth-child(3) .cycle__fill { --n: 2; }
+    .cycle__bar:nth-child(4) .cycle__fill { --n: 3; }
+    .cycle__bar:nth-child(5) .cycle__fill { --n: 4; }
+    .cycle__bar:nth-child(6) .cycle__fill { --n: 5; }
+    @keyframes bar-grow {
+      from {
+        transform: scaleY(0);
+      }
+    }
+  }
+
+  /* Practice cards */
+  .cards {
+    display: grid;
+    gap: 14px;
+  }
+  .card {
+    padding: 32px 28px;
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    transition: background-color var(--t-ui) ease;
+  }
+  .card__title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .card__text {
+    margin-top: 12px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .card__tags {
+    margin-top: 24px;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      background: var(--surface-2);
+    }
+  }
+  @media (min-width: 900px) {
+    .cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Experience accordion */
+  .record {
+    display: grid;
+    gap: 10px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .record__item {
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    transition: background-color var(--t-ui) ease;
+  }
+  .record__item summary {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .record__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .record__name {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    font-size: 16px;
+  }
+  .record__name span {
+    color: var(--ink-soft);
+  }
+  .record__period {
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .record__chev {
+    width: 10px;
+    height: 10px;
+    margin-top: -4px;
+    border-right: 2px solid var(--ink-soft);
+    border-bottom: 2px solid var(--ink-soft);
+    transform: rotate(45deg);
+    transition: transform var(--t-ui) var(--ease-out);
+  }
+  .record__item[open] .record__chev {
+    transform: translateY(4px) rotate(-135deg);
+  }
+  .record__body {
+    overflow: hidden;
+  }
+  .record__body p {
+    padding: 0 24px 22px;
+    max-width: 64ch;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .record__item:hover {
+      background: var(--surface-2);
+    }
+  }
+  @media (max-width: 560px) {
+    .record__item summary {
+      grid-template-columns: 1fr auto;
+      padding: 18px 20px;
+    }
+    .record__period {
+      grid-column: 1;
+      grid-row: 2;
+      font-size: 14px;
+    }
+    .record__chev {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
+    .record__body p {
+      padding: 0 20px 20px;
+    }
+  }
+
+  /* Contact */
+  .reach {
+    margin-top: clamp(112px, 12vw, 176px);
+    padding: clamp(56px, 8vw, 104px) 24px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    text-align: center;
+  }
+  .reach__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .reach .button--ghost {
+    background: var(--ground);
+  }
+  .reach__meta {
+    margin-top: 24px;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+
+  /* Load sequence and the signature move */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .hero [data-line] {
+      transform: translateY(105%);
+      animation: load-line 900ms var(--ease-expo) 100ms forwards;
+    }
+    :global(.js) .hero [data-load] {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: load-rise 700ms var(--ease-out) forwards;
+      animation-delay: var(--d);
+    }
+    @keyframes load-line {
+      to {
+        transform: none;
+      }
+    }
+    @keyframes load-rise {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .panel__portrait img {
+        animation: portrait-drift linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      @keyframes portrait-drift {
+        from {
+          scale: 1.08;
+          translate: 0 -3%;
+        }
+        to {
+          scale: 1.08;
+          translate: 0 3%;
+        }
+      }
+    }
+  }
+</style>
